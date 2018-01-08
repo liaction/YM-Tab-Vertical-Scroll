@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="src/css/ym-tab-vertical-scroll.css"/>
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="navLayout">
+			<h1 class="mui-title">垂直Tab+滚动联动</h1>
+		</header>
+		<div class="mui-content" >
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" id="showTab">
+					<a class="mui-navigate-right">
+						点我试试
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="src/js/ym-tab-vertical-scroll.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			document.getElementById('showTab').addEventListener('tap', function() {
+				YMTab.show();
+			});
+
+			var datas = [];
+
+			var oLeftTitleArray = ['第一部分', '第二部分', '第三部分', '第四部分'];
+
+			var oFirstArray = [];
+			for(var i = 0; i < 8; i++) {
+				oFirstArray.push('第一部分 -->> ' + i);
+			}
+			var oSecondArray = [];
+			for(var i = 0; i < 3; i++) {
+				oSecondArray.push('第二部分 -->> ' + i);
+			}
+			var oThirdArray = [];
+			for(var i = 0; i < 10; i++) {
+				oThirdArray.push('第三部分 -->> ' + i);
+			}
+
+			var oRightArray = [oFirstArray, oSecondArray, oThirdArray, []];
+
+			for(var count = 0; count < Math.min(oLeftTitleArray.length, oRightArray.length); count++) {
+				datas.push({
+					left: {
+						title: oLeftTitleArray[count]
+					},
+					right: {
+						datas: oRightArray[count]
+					}
+				});
+			}
+
+			// 左边标题
+			var _leftHtml = [];
+			// 右边
+			var _rightHtml = [];
+			for(var i = 0; i < datas.length; i++) {
+				_leftHtml.push('<div style="padding: 1rem;" class="main-color-gray"">' +
+					datas[i].left.title +
+					'</div>');
+				// 右边数据填充
+				var rightArray = datas[i].right.datas;
+				var _rightHtmlTemp = '<div style="flex-direction: column;" class="flex-liaciton"><ul class="mui-table-view">';
+				var _tempHtml = '';
+				for(var j = 0; j < rightArray.length; j++) {
+					_tempHtml += '<li class="mui-table-view-cell" id="right-' + i + '-' + j + '">' +
+						'<a class="mui-navigate-right">' + rightArray[j] +
+						'</a>' +
+						'</li>';
+				}
+				_rightHtmlTemp += _tempHtml + '</ul></div>';
+				_rightHtml.push(_rightHtmlTemp);
+			}
+
+			YMTab.init({
+				title: '垂直Tab+滚动联动',
+				html: {
+					left: _leftHtml,
+					right:_rightHtml
+				},
+				datas:datas,
+				callback:{
+					leftTabClick:function (index,isHaveValidData) {
+						mui.toast('tab index : ' + index + ' - 是否有有效数据 :' + isHaveValidData);
+					}
+				},
+				top:45,
+				bottom:100
+			});
+		</script>
+	</body>
+
+</html>

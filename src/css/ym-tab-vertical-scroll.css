@@ -1,0 +1,50 @@
+.flex-liaciton {
+	display: flex;
+	display: -webkit-flex;
+	display: -box;
+}
+
+.ym-hidden {
+	display: none !important;
+}
+.main-backgroud-white{
+	background-color: white !important;
+}
+
+.main-common-background-color {
+	background-color: #EFEFF4 !important;
+}
+
+#LayoutParent {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, .3);
+}
+
+#layoutOfTitle {
+	background-color: white;
+	padding: .5rem 1rem;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: solid #EFEFF4 1px;
+}
+
+#layoutOfBody {
+	position: fixed;
+	bottom: 0px;
+	left: 0;
+	right: 0;
+	width: 100% !important;
+	overflow-y: auto;
+}
+
+#layoutOfBodyOfLeft {
+	overflow-y: auto;
+}
+
+#layoutOfBodyOfRight {
+	overflow-y: auto;
+	flex: 1;
+}
