@@ -1,4 +1,3 @@
-
 //
 //左侧tab加竖直方向滚动联动效果
 //Liaction CHEN.SI
@@ -133,7 +132,7 @@ var YMTab = (function() {
 			});
 
 			var oLayoutOfBodyOfRight = document.getElementById("layoutOfBodyOfRight");
-			oLayoutOfBodyOfRight.addEventListener('scroll',function() {
+			oLayoutOfBodyOfRight.addEventListener('scroll', function() {
 				var scTop = this.scrollTop;
 				currentScrollIndexInArray(oDivArray, scTop, callBackWhenCanChangeSelected)
 			});
@@ -247,7 +246,7 @@ var YMTab = (function() {
 			var leftUseForClickArray = document.getElementsByClassName('left-use-for-click');
 			for(var k = 0; k < leftUseForClickArray.length; k++) {
 				leftUseForClickArray[k].onclick = function(index) {
-					return function () {
+					return function() {
 						if(currentSelectTabIndex === index) { // 防止同一tab重复点击
 							return;
 						}
@@ -287,6 +286,21 @@ var YMTab = (function() {
 			}
 
 			currentSelectTabIndex = firstValidIndex;
+			var _leftWidth = oLayoutOfBodyOfLeft.offsetWidth + 'px';
+			if(mui) { // 暂时使用mui的方法
+				tab.addEventListener("swipeleft", function() {
+					console.log("左");
+					base.css(oLayoutOfBodyOfLeft, {
+						width:'0px'
+					});
+				});
+				tab.addEventListener("swiperight", function() {
+					console.log("右");
+					base.css(oLayoutOfBodyOfLeft, {
+						width: _leftWidth
+					});
+				});
+			}
 
 			base.close();
 
