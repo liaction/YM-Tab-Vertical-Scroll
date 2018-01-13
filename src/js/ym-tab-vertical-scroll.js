@@ -287,7 +287,7 @@ var YMTab = (function() {
 
 			currentSelectTabIndex = firstValidIndex;
 			var _leftWidth = oLayoutOfBodyOfLeft.offsetWidth + 'px';
-			if(mui) { // 暂时使用mui的方法
+			if(data && data.swipe && mui) { // 暂时使用mui的方法
 				tab.addEventListener("swipeleft", function() {
 					console.log("左");
 					base.css(oLayoutOfBodyOfLeft, {
